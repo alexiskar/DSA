@@ -13,10 +13,10 @@ import java.nio.IntBuffer;
 public class BufferedOutputStream 
 {
 	//Variables
-	private static DataOutputStream dataOutputStr;
-	private static IntBuffer buffer;
-	private static int bufSize=4;
-	private static FileOutputStream fileOutputStr;
+	private DataOutputStream dataOutputStr;
+	private IntBuffer buffer;
+	private int bufSize=4;
+	private FileOutputStream fileOutputStr;
 //-------------------------------------------------------------
 	public void create(String fileDir)
 	{
@@ -74,6 +74,14 @@ public class BufferedOutputStream
 		 */
 	}
 //----------------------------------------------------------------------------
+
+	public void SetBufSize(int bufferSize) {
+		this.bufSize=bufferSize;
+	}
+	public int GetBufSize() {
+		return bufSize;
+	}
+	
 	public void close() 
 	{
 	//write integers which are left in the buffer

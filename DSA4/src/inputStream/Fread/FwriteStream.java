@@ -14,11 +14,11 @@ import java.io.BufferedOutputStream;
 public class FwriteStream 
 {
 	//Variables
-	private static DataOutputStream dataOutputStr;
+	private DataOutputStream dataOutputStr;
 	
-	private static BufferedOutputStream bufOUT;
+	private BufferedOutputStream bufOUT;
 	
-	private static FileOutputStream fileOutputStr;
+	private FileOutputStream fileOutputStr;
 //-------------------------------------------------------------
 	public void create(String fileDir)
 	{
@@ -58,7 +58,8 @@ public class FwriteStream
 			} 
 			catch (IOException e) 
 			{
-				e.printStackTrace();
+				System.out.println("Unable to write in the output File!");
+				//e.printStackTrace();
 			}
 		//}
 			  //while
@@ -74,7 +75,7 @@ public class FwriteStream
 	public void close() 
 	{
 		try 
-		{	bufOUT.flush();
+		{	
 			bufOUT.close();
 		
 		} 

@@ -55,7 +55,7 @@ public class BufferedInputStream
 	     * (similar to an array). You can retrieve it via method capacity().
 	     * https://www.ntu.edu.sg/home/ehchua/programming/java/J5b_IO_advanced.html
 		 */
-		if (buffer.capacity() == buffer.position())
+		if (buffer.position()==buffer.capacity())
 			buffer.clear();
 		try 
 		{
@@ -64,18 +64,21 @@ public class BufferedInputStream
 			 * The position increases by the number of elements transferred.
 			 * https://www.ntu.edu.sg/home/ehchua/programming/java/J5b_IO_advanced.html
 			 */
+			if(dataInputStr.available()>0) {
 			inpVal=dataInputStr.readInt();
 			buffer.put(inpVal);
-			//System.out.println("dataInputStr: " + temp);
+			}
 		} 
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			System.out.println("Error in reading");
+			//e.printStackTrace();
 			/*printStackTrace is very useful tool for diagnosing an Exception. 
 			It tells you what happened and where in the code this happened.
 			https://stackoverflow.com/questions/2560368/what-is-the-use-of-printstacktrace-method-in-java
 			*/
 		}
+		
 		return buffer.get(buffer.position()-1);
 	}
 //----------------------------------------------------------------------------
@@ -86,14 +89,16 @@ public class BufferedInputStream
 		    * of bytes that can be read
 		    * https://stackoverflow.com/questions/21216476/check-if-datainputstream-has-content
 		    */
-			if (dataInputStr.available() > 0)
+			if (dataInputStr.available() > 1)
 				return false;
-			else
+			else {
 				return true;
+			}
 		}
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("error in EOF");
 			return true;
 		}
 	}
