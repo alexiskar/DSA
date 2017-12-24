@@ -18,9 +18,9 @@ public class MapOut {
 			open(inp);
 	}
 	public MapOut(String inp, Integer bf) {
-		this.bufSize=bf;
-		open(inp);
-}
+		this.bufSize=bf*Integer.BYTES;
+	//	open(inp);
+	}
 	public void close() {
 		try {
 			fileS.close();
@@ -28,7 +28,7 @@ public class MapOut {
 			e.printStackTrace();
 		}
 	}
-	void open(String fileName) {
+	public void open(String fileName) {
 			try {
 				inpFile=new File(fileName);
 				if(!inpFile.exists()) {
@@ -36,23 +36,23 @@ public class MapOut {
 				}
 				fileS = new RandomAccessFile(inpFile, "rw");
 				outCh=fileS.getChannel();
-				buffer = outCh.map(FileChannel.MapMode.READ_WRITE, 0, bufSize);
+				buffer = outCh.map(FileChannel.MapMode.READ_WRITE, lastPos, bufSize);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}		
 	}
-	public void write(Integer num) {
-			try {
+	public void write(int num) {
 				if(bufSize-pos<Integer.BYTES) {
+					lastPos+=pos;
+					buffer.clear();
 					pos=0;
-				buffer=outCh.map(FileChannel.MapMode.READ_WRITE, lastPos, bufSize);
+					try {
+						buffer=outCh.map(FileChannel.MapMode.READ_WRITE, lastPos, bufSize);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		buffer.putInt(num);
-		buffer.clear();
-		lastPos+=Integer.BYTES;
 		pos+=Integer.BYTES;
 	}
 	

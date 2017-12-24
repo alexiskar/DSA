@@ -25,8 +25,8 @@ import inputStream.SystemCall.*;
 
 public class Main {
 	final static Logger logger = Logger.getLogger(Main.class);
-	static int MAX_STREAMS=2;
-	static int MAX_INTS=1000000;
+	static int MAX_STREAMS=1;
+	static int MAX_INTS=30000000;
 	static int MAX_N=1;
 	static List<Integer> values = new ArrayList();
 	static void clearDIR() {
@@ -43,9 +43,8 @@ public class Main {
 	}
 	static void createDataSet(int l) {
 		for(int j=0;j<l;j++) {
-			MapOut mo = new MapOut("data/set"+j+".data",10000);
-			//BufferedOutputStream mo = new BufferedOutputStream();
-			//mo.create("data/set"+j+".data");
+			MapOut mo = new MapOut("data/set"+j+".data",1000);
+			mo.open("data/set"+j+".data");
 	        for (int i = 0; i < MAX_INTS; i++) {
 	        		int nr = ThreadLocalRandom.current().nextInt(Integer.MIN_VALUE, Integer.MAX_VALUE);
 	             mo.write(nr);
@@ -54,13 +53,15 @@ public class Main {
 		}
 	}
 	  public static void main(String[] args) {
-		  int[] bufSizes = {10000,100000};
+		  int[] bufSizes = {100,10000,1000000};
+
+		  createDataSet(MAX_STREAMS);
 		  
 		  BasicConfigurator.configure();
-		  createDataSet(MAX_STREAMS);
 
-		  
+		  /*
 		  //System call
+		  System.out.println("Test System call");
 		  for(int Ks=1;Ks<=MAX_STREAMS;Ks++) {
 			  System.out.println(Ks+" streams");
 		  for(int N=0;N<MAX_N;N++) {
@@ -78,6 +79,7 @@ public class Main {
 		  
 		  
 		//Fread/ fwrite
+		  System.out.println("Test Fread/Fwrite");
 		  for(int Ks=1;Ks<=MAX_STREAMS;Ks++) {
 			  System.out.println(Ks+" streams");
 		  for(int N=0;N<MAX_N;N++) {
@@ -89,12 +91,12 @@ public class Main {
 			  ExServ.shutdown();
 			  while(!ExServ.isTerminated()) {}
 			  System.out.println("Fread/Fwrite test finished. No:"+N);
-			  clearDIR();
+			  
 			  }
 		  }
 		  
-		  
 		  //Buffer
+		  System.out.println("Test Buffer");
 		  for(int Ks=1;Ks<=MAX_STREAMS;Ks++) {
 			  System.out.println(Ks+" streams");
 			  for(int bf = 0;bf<bufSizes.length;bf++) {
@@ -111,10 +113,10 @@ public class Main {
 			  clearDIR();
 			  }
 		  }
-		  }
-		 
+		  }*/
 		  //Mapping
-		  
+
+		  System.out.println("Test Mapping");
 		  for(int Ks=1;Ks<=MAX_STREAMS;Ks++) {
 			  System.out.println(Ks+" streams");
 			  for(int bf = 0;bf<bufSizes.length;bf++) {
@@ -122,16 +124,17 @@ public class Main {
 		  for(int N=0;N<MAX_N;N++) {
 			  ExecutorService ExServ = Executors.newFixedThreadPool(Ks);
 			  for(int i=0;i<Ks;i++) {
-				  Runnable st = new ExpRunBuffer(i,bufSizes[bf]);
+				  Runnable st = new ExpRunMap(i,bufSizes[bf]);
 				  ExServ.execute(st);
 			  }
 			  ExServ.shutdown();
 			  while(!ExServ.isTerminated()) {}
-			  System.out.println("Mapping test finished. No:"+N);
+		//	  System.out.println("Mapping test finished. No:"+N);
 			  clearDIR();
 			  }
 			  }
 		  }
+
 		  /*
 		  List<List<Integer>> inp = new ArrayList<List<Integer>>();
 		  MapInp mi = new MapInp("data/set1.data",15);
@@ -163,9 +166,9 @@ public class Main {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				StopWatch wa = new Log4JStopWatch("test-SystemCalls");
 				SystemCallsInputStream inp = new SystemCallsInputStream();
 				SystemCallsOutputStream out = new SystemCallsOutputStream();
-				StopWatch wa = new Log4JStopWatch("test-SystemCalls");
 				inp.open("data/set"+i+".data");
 				out.create("data/out/outp"+i+".data");
 				while(!inp.endOfStream()) {
@@ -188,9 +191,9 @@ public class Main {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				StopWatch wa = new Log4JStopWatch("test-FreadFwrite");
 				FreadStream inp = new FreadStream();
 				FwriteStream out = new FwriteStream();
-				StopWatch wa = new Log4JStopWatch("test-FreadFwrite");
 				inp.open("data/set"+i+".data");
 				
 				out.create("data/out/outp"+i+".data");
@@ -214,13 +217,13 @@ public class Main {
  
 			@Override
 			public void run() {
+
+				StopWatch wa = new Log4JStopWatch("test-BufferOpenWrite");
 				BufferedInputStream inp = new BufferedInputStream();
 				BufferedOutputStream out = new BufferedOutputStream();
 				inp.SetBufSize(B);
 				out.SetBufSize(B);
 				inp.open("data/set"+i+".data");
-
-				StopWatch wa = new Log4JStopWatch("test-BufferOpenWrite");
 				out.create("data/out/outp"+i+".data");
 				
 				while(!inp.endOfStream()) {
@@ -244,10 +247,12 @@ public class Main {
 			  }
  
 			@Override
-			public void run() {
+			public void run() {			
+				StopWatch wa = new Log4JStopWatch("test-Map");
 				MapInp inp = new MapInp("data/set"+i+".data",B);
 				MapOut out = new MapOut("data/out/set"+i+".data",B);
-				StopWatch wa = new Log4JStopWatch("test-BufferOpenWrite");				
+				inp.open("data/set"+i+".data");
+				out.open("data/out/set"+i+".data");
 				while(!inp.endOfStream()) {
 					out.write(inp.readNext());
 				}

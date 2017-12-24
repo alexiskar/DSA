@@ -55,6 +55,7 @@ public class FwriteStream
 			try 
 			{
 			  dataOutputStr.writeInt(val);
+			  dataOutputStr.flush();
 			} 
 			catch (IOException e) 
 			{

@@ -53,7 +53,7 @@ public class SystemCallsInputStream {
     
     public boolean endOfStream() {
 		try {
-			 if (dataInputStr.available()>0) 
+			 if (dataInputStr.available()>1) 
 				return false;
 			 else
 				 return true;
