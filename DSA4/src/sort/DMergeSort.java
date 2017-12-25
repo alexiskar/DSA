@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import inputStream.Mapping.MapOut;
+
 //Written with inspiration by https://github.com/dpkagrawal/kwaymerge/blob/master/src/KWayMerging.java
 
 public class DMergeSort {
 	private PriorityQueue<BufSort> heap;
 	private int strSize=1;
 	//List<>
-	public DMergeSort(String fn,int strSize) {
-		this.strSize=strSize;
+	public DMergeSort() {
 	}
 	public void kMerge(List<List<Integer>> inp) {
 		List <Integer> out = new ArrayList<Integer>();
 		heap = new PriorityQueue<BufSort>(inp.size(), new BufSortComparator());
-		int[] index = new int[inp.size()];
 		
 		//making a heap
 		int d=0;
@@ -31,36 +31,13 @@ public class DMergeSort {
 				inp.remove(i);
 			}
 		}
-		
-
-		int m=0;
-
-		//while heap is not empty
-		while(!heap.isEmpty()){
-			BufSort b = heap.poll();
-			
-			//result[m++]=b.arr[b.index];
-			System.out.println(b.getVal());
-			//if(b.getInd()< ac.arr.length-1){
-			//	heap.add(new BufSort(ac.arr, ac.index+1));
-			//}
-		}
- 
-		
-		/*
+	}
+	public void outputResult(String FN,int b) {
+		MapOut mo = new MapOut(FN,b);
 		while(!heap.isEmpty()) {
-			BufSort b=heap.remove();
-			int ind=b.getInd();
-			out.add(b.getVal());
-			System.out.println(b.getVal());
-			if(index[ind]<inp.get(ind).size()) {
-				heap.add(new BufSort(inp.get(ind).get(index[ind]),ind));
-				index[ind]=++index[ind];
-			}
+			mo.write(heap.poll().getVal());
 		}
-		*/
-		
-		
+		mo.close();
 	}
 }
 

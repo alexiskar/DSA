@@ -10,34 +10,55 @@ public class MapInp {
 	private File inpFile;
 	private long fileLen;
 	private int pos=0,lastPos=0,bufCap;
-	private int bufSize=4;
+	public int bufSize=4;
 	private RandomAccessFile fstream;
 	private FileChannel inpCh;
 	private MappedByteBuffer buffer;
 	public MapInp(String inp,int b) {
 		this.bufSize=b*Integer.BYTES;;
-	//	open(inp);
+		open(inp);
 	}
 	public void close() throws IOException {
 		fstream.close();
+	}
+	public long getFS() {
+		return fileLen;
+	}
+	public void back(int a) {
+		if(buffer.position()==0) {
+			lastPos-=bufSize;
+			buffer.position(bufSize-4);
+		}
+		else
+		buffer.position(buffer.position()-4);
+		try {
+			buffer=inpCh.map(FileChannel.MapMode.READ_WRITE, lastPos, bufCap);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public void open(String fileName) {
 		inpFile=new File(fileName);
 		try {
 			inpFile = new File(fileName);
-			fstream=new RandomAccessFile(inpFile,"r");
+			fstream=new RandomAccessFile(inpFile,"rw");
 			inpCh=fstream.getChannel();
-			fileLen=inpCh.size();
+			fileLen=fstream.length();
 			if(fileLen>bufSize) {
 				bufCap=bufSize;
 			}
 			else {
 				bufCap=(int)fileLen;
 			}
-			buffer = inpCh.map(FileChannel.MapMode.READ_ONLY, 0, fstream.length());
+			buffer = inpCh.map(FileChannel.MapMode.READ_WRITE, 0, fstream.length());
 		} catch (IOException e) {
 			System.out.println("File "+fileName+" not found");
+			e.printStackTrace();
 		}
+	}
+	public boolean fullBuffer() {
+		return (buffer.position()==buffer.capacity())?true:false;
 	}
 	public int readNext() {
 		//bufCap=Math.min((int)fileLen-pos-lastPos,bufSize); //current buffer capacity

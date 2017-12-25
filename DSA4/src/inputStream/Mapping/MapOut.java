@@ -19,7 +19,7 @@ public class MapOut {
 	}
 	public MapOut(String inp, Integer bf) {
 		this.bufSize=bf*Integer.BYTES;
-	//	open(inp);
+		open(inp);
 	}
 	public void close() {
 		try {
@@ -46,6 +46,13 @@ public class MapOut {
 					lastPos+=pos;
 					buffer.clear();
 					pos=0;
+					try {
+						fileS.setLength(lastPos+bufSize);
+						//extend mapped area if necessary
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					try {
 						buffer=outCh.map(FileChannel.MapMode.READ_WRITE, lastPos, bufSize);
 					} catch (IOException e) {

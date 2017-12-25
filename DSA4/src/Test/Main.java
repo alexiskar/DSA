@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 import sort.DMergeSort;
+import sort.ExtMergeSort;
 import inputStream.Fread.*;
 import inputStream.Buffer.*;
 import inputStream.Mapping.*;
@@ -43,8 +44,7 @@ public class Main {
 	}
 	static void createDataSet(int l) {
 		for(int j=0;j<l;j++) {
-			MapOut mo = new MapOut("data/set"+j+".data",1000);
-			mo.open("data/set"+j+".data");
+			MapOut mo = new MapOut("data/set"+j+".data",500);
 	        for (int i = 0; i < MAX_INTS; i++) {
 	        		int nr = ThreadLocalRandom.current().nextInt(Integer.MIN_VALUE, Integer.MAX_VALUE);
 	             mo.write(nr);
@@ -59,6 +59,7 @@ public class Main {
 		  
 		  BasicConfigurator.configure();
 
+		  
 		  /*
 		  //System call
 		  System.out.println("Test System call");
@@ -113,7 +114,7 @@ public class Main {
 			  clearDIR();
 			  }
 		  }
-		  }*/
+		  }
 		  //Mapping
 
 		  System.out.println("Test Mapping");
@@ -129,22 +130,24 @@ public class Main {
 			  }
 			  ExServ.shutdown();
 			  while(!ExServ.isTerminated()) {}
-		//	  System.out.println("Mapping test finished. No:"+N);
+			  System.out.println("Mapping test finished. No:"+N);
 			  clearDIR();
 			  }
 			  }
-		  }
+		  }*/
 
-		  /*
-		  List<List<Integer>> inp = new ArrayList<List<Integer>>();
-		  MapInp mi = new MapInp("data/set1.data",15);
+		  //multiway-merge sort internal memory
+		 /* List<List<Integer>> inp = new ArrayList<List<Integer>>();
+		  MapInp mi = new MapInp("data/set0.data",10000);
 		  int b=0;
 		  while(!mi.endOfStream()) {
 			  List<Integer> t=new ArrayList<Integer>();
+			  //b=;
+			  
 			  for(int i=0;i<mi.bufSize;i++) {
-				  //
-				  if(!mi.endOfStream())
-					  t.add(mi.readNext());
+				  //d = (file size)/(buffer size)
+				  		b=mi.readNext();
+					  t.add(b);
 			  }
 			  
 			  inp.add(t);
@@ -152,9 +155,19 @@ public class Main {
 		  for(int i=0;i<inp.size();i++) {
 			  Collections.sort(inp.get(i));
 		  }
-		  System.out.println("ab");
-		  DMergeSort a = new DMergeSort("a",2);
-		  //a.kMerge(inp);
+		  DMergeSort a = new DMergeSort();
+		  a.kMerge(inp);*/
+
+		  //multiway-merge sort external memory
+		  /*
+		  ExtMergeSort e = new ExtMergeSort(100000,10000);
+		  e.firstSort();
+		  
+		  MapInp c = new MapInp("data/out/sort0_1.data",10);
+		  int d=0;
+		  while(!c.endOfStream()) { int t=c.readNext(); 
+		  if(t==0) d++;  }
+		  System.out.println(d);
 		  */
 	  }
 	  public static class ExpRunSysCall implements Runnable {
@@ -251,7 +264,6 @@ public class Main {
 				StopWatch wa = new Log4JStopWatch("test-Map");
 				MapInp inp = new MapInp("data/set"+i+".data",B);
 				MapOut out = new MapOut("data/out/set"+i+".data",B);
-				inp.open("data/set"+i+".data");
 				out.open("data/out/set"+i+".data");
 				while(!inp.endOfStream()) {
 					out.write(inp.readNext());
