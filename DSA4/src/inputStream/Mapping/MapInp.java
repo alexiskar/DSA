@@ -1,6 +1,5 @@
 package inputStream.Mapping;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
@@ -9,30 +8,22 @@ import java.nio.channels.FileChannel;
 public class MapInp {
 	private File inpFile;
 	private long fileLen;
-	private int pos=0,lastPos=0,bufCap;
+	public int pos=0,lastPos=0,bufCap;
 	public int bufSize=4;
 	private RandomAccessFile fstream;
 	private FileChannel inpCh;
 	private MappedByteBuffer buffer;
+	int lp=0;
 	public MapInp(String inp,int b) {
 		this.bufSize=b*Integer.BYTES;;
 		open(inp);
 	}
-	public void close() throws IOException {
-		fstream.close();
-	}
 	public long getFS() {
 		return fileLen;
 	}
-	public void back(int a) {
-		if(buffer.position()==0) {
-			lastPos-=bufSize;
-			buffer.position(bufSize-4);
-		}
-		else
-		buffer.position(buffer.position()-4);
+	public void close() {
 		try {
-			buffer=inpCh.map(FileChannel.MapMode.READ_WRITE, lastPos, bufCap);
+			fstream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +32,6 @@ public class MapInp {
 	public void open(String fileName) {
 		inpFile=new File(fileName);
 		try {
-			inpFile = new File(fileName);
 			fstream=new RandomAccessFile(inpFile,"rw");
 			inpCh=fstream.getChannel();
 			fileLen=fstream.length();
@@ -57,9 +47,7 @@ public class MapInp {
 			e.printStackTrace();
 		}
 	}
-	public boolean fullBuffer() {
-		return (buffer.position()==buffer.capacity())?true:false;
-	}
+
 	public int readNext() {
 		//bufCap=Math.min((int)fileLen-pos-lastPos,bufSize); //current buffer capacity
 		if(fileLen-pos-lastPos>bufSize) bufCap = bufSize;

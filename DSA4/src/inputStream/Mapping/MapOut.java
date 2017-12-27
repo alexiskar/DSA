@@ -23,6 +23,8 @@ public class MapOut {
 	}
 	public void close() {
 		try {
+			fileS.setLength((lastPos)+pos);
+			//if file is bigger
 			fileS.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -46,13 +48,6 @@ public class MapOut {
 					lastPos+=pos;
 					buffer.clear();
 					pos=0;
-					try {
-						fileS.setLength(lastPos+bufSize);
-						//extend mapped area if necessary
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
 					try {
 						buffer=outCh.map(FileChannel.MapMode.READ_WRITE, lastPos, bufSize);
 					} catch (IOException e) {

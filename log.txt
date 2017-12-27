@@ -1,0 +1,162 @@
+1 [main] INFO org.perf4j.TimingLogger  - start[1514385861895] time[2] tag[test-multiwayMerge N=100 M=100 d=100]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514385873954] time[2] tag[test-multiwayMerge N=100 M=100 d=1000]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514385892090] time[2] tag[test-multiwayMerge N=100 M=100 d=10000]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514385998373] time[2] tag[test-multiwayMerge N=100 M=100 d=100000]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514386015253] time[2] tag[test-multiwayMerge N=100 M=100 d=1000000]
+0 [main] INFO org.perf4j.TimingLogger  - start[1514386209930] time[3] tag[test-multiwayMerge N=100 M=1000 d=100]
+2 [main] INFO org.perf4j.TimingLogger  - start[1514386209935] time[3] tag[test-multiwayMerge N=100 M=1000 d=1000]
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386209938] time[3] tag[test-multiwayMerge N=100 M=1000 d=10000]
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386209941] time[3] tag[test-multiwayMerge N=100 M=1000 d=100000]
+4 [main] INFO org.perf4j.TimingLogger  - start[1514386209937] time[3] tag[test-multiwayMerge N=100 M=1000 d=1000000]
+0 [main] INFO org.perf4j.TimingLogger  - start[1514386278045] time[2] tag[test-multiwayMerge N=100 M=10000 d=100]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514386278047] time[2] tag[test-multiwayMerge N=100 M=10000 d=1000]
+2 [main] INFO org.perf4j.TimingLogger  - start[1514386278049] time[2] tag[test-multiwayMerge N=100 M=10000 d=10000]
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386278051] time[2] tag[test-multiwayMerge N=100 M=10000 d=100000]
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386278053] time[2] tag[test-multiwayMerge N=100 M=10000 d=1000000]
+0 [main] INFO org.perf4j.TimingLogger  - start[1514386319291] time[2] tag[test-multiwayMerge N=100 M=100000 d=100]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514386319293] time[2] tag[test-multiwayMerge N=100 M=100000 d=1000]
+2 [main] INFO org.perf4j.TimingLogger  - start[1514386319295] time[2] tag[test-multiwayMerge N=100 M=100000 d=10000]
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386319297] time[2] tag[test-multiwayMerge N=100 M=100000 d=100000]
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386319299] time[2] tag[test-multiwayMerge N=100 M=100000 d=1000000]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514386352906] time[7] tag[test-multiwayMerge N=100 M=1000000 d=100]
+2 [main] INFO org.perf4j.TimingLogger  - start[1514386352913] time[3] tag[test-multiwayMerge N=100 M=1000000 d=1000]
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386352916] time[3] tag[test-multiwayMerge N=100 M=1000000 d=10000]
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386352919] time[3] tag[test-multiwayMerge N=100 M=1000000 d=100000]
+4 [main] INFO org.perf4j.TimingLogger  - start[1514386352921] time[3] tag[test-multiwayMerge N=100 M=1000000 d=1000000]
+657 [main] INFO org.perf4j.TimingLogger  - start[1514386521853] time[105] tag[test-multiwayMerge N=10000 M=100 d=100]
+681 [main] INFO org.perf4j.TimingLogger  - start[1514386521962] time[20] tag[test-multiwayMerge N=10000 M=100 d=1000]
+692 [main] INFO org.perf4j.TimingLogger  - start[1514386521983] time[10] tag[test-multiwayMerge N=10000 M=100 d=10000]
+709 [main] INFO org.perf4j.TimingLogger  - start[1514386521993] time[16] tag[test-multiwayMerge N=10000 M=100 d=100000]
+722 [main] INFO org.perf4j.TimingLogger  - start[1514386522010] time[13] tag[test-multiwayMerge N=10000 M=100 d=1000000]
+774 [main] INFO org.perf4j.TimingLogger  - start[1514386522024] time[51] tag[test-multiwayMerge N=10000 M=1000 d=100]
+784 [main] INFO org.perf4j.TimingLogger  - start[1514386522076] time[9] tag[test-multiwayMerge N=10000 M=1000 d=1000]
+789 [main] INFO org.perf4j.TimingLogger  - start[1514386522086] time[4] tag[test-multiwayMerge N=10000 M=1000 d=10000]
+794 [main] INFO org.perf4j.TimingLogger  - start[1514386522091] time[4] tag[test-multiwayMerge N=10000 M=1000 d=100000]
+799 [main] INFO org.perf4j.TimingLogger  - start[1514386522096] time[4] tag[test-multiwayMerge N=10000 M=1000 d=1000000]
+846 [main] INFO org.perf4j.TimingLogger  - start[1514386522100] time[46] tag[test-multiwayMerge N=10000 M=10000 d=100]
+849 [main] INFO org.perf4j.TimingLogger  - start[1514386522147] time[2] tag[test-multiwayMerge N=10000 M=10000 d=1000]
+851 [main] INFO org.perf4j.TimingLogger  - start[1514386522150] time[2] tag[test-multiwayMerge N=10000 M=10000 d=10000]
+854 [main] INFO org.perf4j.TimingLogger  - start[1514386522152] time[2] tag[test-multiwayMerge N=10000 M=10000 d=100000]
+856 [main] INFO org.perf4j.TimingLogger  - start[1514386522155] time[2] tag[test-multiwayMerge N=10000 M=10000 d=1000000]
+859 [main] INFO org.perf4j.TimingLogger  - start[1514386522157] time[2] tag[test-multiwayMerge N=10000 M=100000 d=100]
+862 [main] INFO org.perf4j.TimingLogger  - start[1514386522160] time[3] tag[test-multiwayMerge N=10000 M=100000 d=1000]
+865 [main] INFO org.perf4j.TimingLogger  - start[1514386522164] time[2] tag[test-multiwayMerge N=10000 M=100000 d=10000]
+868 [main] INFO org.perf4j.TimingLogger  - start[1514386522166] time[2] tag[test-multiwayMerge N=10000 M=100000 d=100000]
+870 [main] INFO org.perf4j.TimingLogger  - start[1514386522169] time[2] tag[test-multiwayMerge N=10000 M=100000 d=1000000]
+873 [main] INFO org.perf4j.TimingLogger  - start[1514386522171] time[2] tag[test-multiwayMerge N=10000 M=1000000 d=100]
+875 [main] INFO org.perf4j.TimingLogger  - start[1514386522174] time[2] tag[test-multiwayMerge N=10000 M=1000000 d=1000]
+878 [main] INFO org.perf4j.TimingLogger  - start[1514386522177] time[2] tag[test-multiwayMerge N=10000 M=1000000 d=10000]
+880 [main] INFO org.perf4j.TimingLogger  - start[1514386522179] time[2] tag[test-multiwayMerge N=10000 M=1000000 d=100000]
+883 [main] INFO org.perf4j.TimingLogger  - start[1514386522181] time[2] tag[test-multiwayMerge N=10000 M=1000000 d=1000000]
+5148 [main] INFO org.perf4j.TimingLogger  - start[1514386545115] time[5145] tag[test-multiwayMerge N=1000000 M=100 d=100]
+10890 [main] INFO org.perf4j.TimingLogger  - start[1514386551389] time[4614] tag[test-multiwayMerge N=1000000 M=100 d=1000]
+14706 [main] INFO org.perf4j.TimingLogger  - start[1514386557041] time[2777] tag[test-multiwayMerge N=1000000 M=100 d=10000]
+18490 [main] INFO org.perf4j.TimingLogger  - start[1514386560907] time[2696] tag[test-multiwayMerge N=1000000 M=100 d=100000]
+20014 [main] INFO org.perf4j.TimingLogger  - start[1514386563603] time[1524] tag[test-multiwayMerge N=1000000 M=100 d=1000000]
+21271 [main] INFO org.perf4j.TimingLogger  - start[1514386565127] time[1256] tag[test-multiwayMerge N=1000000 M=1000 d=100]
+22546 [main] INFO org.perf4j.TimingLogger  - start[1514386566842] time[816] tag[test-multiwayMerge N=1000000 M=1000 d=1000]
+23774 [main] INFO org.perf4j.TimingLogger  - start[1514386567693] time[1194] tag[test-multiwayMerge N=1000000 M=1000 d=10000]
+24264 [main] INFO org.perf4j.TimingLogger  - start[1514386568887] time[490] tag[test-multiwayMerge N=1000000 M=1000 d=100000]
+24748 [main] INFO org.perf4j.TimingLogger  - start[1514386569377] time[483] tag[test-multiwayMerge N=1000000 M=1000 d=1000000]
+25109 [main] INFO org.perf4j.TimingLogger  - start[1514386569861] time[361] tag[test-multiwayMerge N=1000000 M=10000 d=100]
+25518 [main] INFO org.perf4j.TimingLogger  - start[1514386570226] time[405] tag[test-multiwayMerge N=1000000 M=10000 d=1000]
+25873 [main] INFO org.perf4j.TimingLogger  - start[1514386570631] time[354] tag[test-multiwayMerge N=1000000 M=10000 d=10000]
+26243 [main] INFO org.perf4j.TimingLogger  - start[1514386570986] time[369] tag[test-multiwayMerge N=1000000 M=10000 d=100000]
+26606 [main] INFO org.perf4j.TimingLogger  - start[1514386571356] time[362] tag[test-multiwayMerge N=1000000 M=10000 d=1000000]
+26921 [main] INFO org.perf4j.TimingLogger  - start[1514386571719] time[315] tag[test-multiwayMerge N=1000000 M=100000 d=100]
+27230 [main] INFO org.perf4j.TimingLogger  - start[1514386572034] time[309] tag[test-multiwayMerge N=1000000 M=100000 d=1000]
+27542 [main] INFO org.perf4j.TimingLogger  - start[1514386572344] time[311] tag[test-multiwayMerge N=1000000 M=100000 d=10000]
+27858 [main] INFO org.perf4j.TimingLogger  - start[1514386572655] time[316] tag[test-multiwayMerge N=1000000 M=100000 d=100000]
+28175 [main] INFO org.perf4j.TimingLogger  - start[1514386572971] time[316] tag[test-multiwayMerge N=1000000 M=100000 d=1000000]
+28502 [main] INFO org.perf4j.TimingLogger  - start[1514386573288] time[326] tag[test-multiwayMerge N=1000000 M=1000000 d=100]
+28815 [main] INFO org.perf4j.TimingLogger  - start[1514386573615] time[312] tag[test-multiwayMerge N=1000000 M=1000000 d=1000]
+29109 [main] INFO org.perf4j.TimingLogger  - start[1514386573928] time[294] tag[test-multiwayMerge N=1000000 M=1000000 d=10000]
+29435 [main] INFO org.perf4j.TimingLogger  - start[1514386574222] time[325] tag[test-multiwayMerge N=1000000 M=1000000 d=100000]
+29757 [main] INFO org.perf4j.TimingLogger  - start[1514386574548] time[321] tag[test-multiwayMerge N=1000000 M=1000000 d=1000000]
+Too many filesToo many files
+2 [main] INFO org.perf4j.TimingLogger  - start[1514386612737] time[0] tag[test-multiwayMerge N=30000000 M=100 d=100]
+Too many files
+2 [main] INFO org.perf4j.TimingLogger  - start[1514386612737] time[0] tag[test-multiwayMerge N=30000000 M=100 d=1000]
+Too many files
+2 [main] INFO org.perf4j.TimingLogger  - start[1514386612737] time[0] tag[test-multiwayMerge N=30000000 M=100 d=10000]
+Too many files
+2 [main] INFO org.perf4j.TimingLogger  - start[1514386612737] time[0] tag[test-multiwayMerge N=30000000 M=100 d=100000]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386612738] time[0] tag[test-multiwayMerge N=30000000 M=100 d=1000000]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386612738] time[0] tag[test-multiwayMerge N=30000000 M=1000 d=100]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386612738] time[0] tag[test-multiwayMerge N=30000000 M=1000 d=1000]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386612738] time[0] tag[test-multiwayMerge N=30000000 M=1000 d=10000]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386612738] time[0] tag[test-multiwayMerge N=30000000 M=1000 d=100000]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514386612738] time[0] tag[test-multiwayMerge N=30000000 M=1000 d=1000000]
+38573 [main] INFO org.perf4j.TimingLogger  - start[1514386612738] time[38570] tag[test-multiwayMerge N=30000000 M=10000 d=100]
+70332 [main] INFO org.perf4j.TimingLogger  - start[1514386651752] time[31315] tag[test-multiwayMerge N=30000000 M=10000 d=1000]
+97694 [main] INFO org.perf4j.TimingLogger  - start[1514386683176] time[27253] tag[test-multiwayMerge N=30000000 M=10000 d=10000]
+115694 [main] INFO org.perf4j.TimingLogger  - start[1514386710429] time[18000] tag[test-multiwayMerge N=30000000 M=10000 d=100000]
+133734 [main] INFO org.perf4j.TimingLogger  - start[1514386728430] time[18039] tag[test-multiwayMerge N=30000000 M=10000 d=1000000]
+149950 [main] INFO org.perf4j.TimingLogger  - start[1514386746469] time[16216] tag[test-multiwayMerge N=30000000 M=100000 d=100]
+168186 [main] INFO org.perf4j.TimingLogger  - start[1514386762698] time[18224] tag[test-multiwayMerge N=30000000 M=100000 d=1000]
+181757 [main] INFO org.perf4j.TimingLogger  - start[1514386780922] time[13570] tag[test-multiwayMerge N=30000000 M=100000 d=10000]
+195254 [main] INFO org.perf4j.TimingLogger  - start[1514386794492] time[13497] tag[test-multiwayMerge N=30000000 M=100000 d=100000]
+208854 [main] INFO org.perf4j.TimingLogger  - start[1514386807989] time[13599] tag[test-multiwayMerge N=30000000 M=100000 d=1000000]
+232234 [main] INFO org.perf4j.TimingLogger  - start[1514386821589] time[23380] tag[test-multiwayMerge N=30000000 M=1000000 d=100]
+246320 [main] INFO org.perf4j.TimingLogger  - start[1514386844969] time[14086] tag[test-multiwayMerge N=30000000 M=1000000 d=1000]
+259893 [main] INFO org.perf4j.TimingLogger  - start[1514386859056] time[13572] tag[test-multiwayMerge N=30000000 M=1000000 d=10000]
+273146 [main] INFO org.perf4j.TimingLogger  - start[1514386872628] time[13253] tag[test-multiwayMerge N=30000000 M=1000000 d=100000]
+286321 [main] INFO org.perf4j.TimingLogger  - start[1514386885881] time[13175] tag[test-multiwayMerge N=30000000 M=1000000 d=1000000]
+Too many files
+0 [main] INFO org.perf4j.TimingLogger  - start[1514388922838] time[1] tag[test-multiwayMerge N=300000000 M=10 d=100]
+Too many files
+2 [main] INFO org.perf4j.TimingLogger  - start[1514388922843] time[0] tag[test-multiwayMerge N=300000000 M=10 d=1000]
+Too many files
+2 [main] INFO org.perf4j.TimingLogger  - start[1514388922843] time[0] tag[test-multiwayMerge N=300000000 M=10 d=10000]
+Too many files
+2 [main] INFO org.perf4j.TimingLogger  - start[1514388922843] time[0] tag[test-multiwayMerge N=300000000 M=10 d=100000]
+Too many files
+2 [main] INFO org.perf4j.TimingLogger  - start[1514388922843] time[0] tag[test-multiwayMerge N=300000000 M=10 d=1000000]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514388922843] time[0] tag[test-multiwayMerge N=300000000 M=100 d=100]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514388922844] time[0] tag[test-multiwayMerge N=300000000 M=100 d=1000]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514388922844] time[0] tag[test-multiwayMerge N=300000000 M=100 d=10000]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514388922844] time[0] tag[test-multiwayMerge N=300000000 M=100 d=100000]
+Too many files
+3 [main] INFO org.perf4j.TimingLogger  - start[1514388922844] time[0] tag[test-multiwayMerge N=300000000 M=100 d=1000000]
+Too many files
+4 [main] INFO org.perf4j.TimingLogger  - start[1514388922844] time[0] tag[test-multiwayMerge N=300000000 M=1000 d=100]
+Too many files
+4 [main] INFO org.perf4j.TimingLogger  - start[1514388922845] time[0] tag[test-multiwayMerge N=300000000 M=1000 d=1000]
+Too many files
+4 [main] INFO org.perf4j.TimingLogger  - start[1514388922845] time[0] tag[test-multiwayMerge N=300000000 M=1000 d=10000]
+Too many files
+4 [main] INFO org.perf4j.TimingLogger  - start[1514388922845] time[0] tag[test-multiwayMerge N=300000000 M=1000 d=100000]
+Too many files
+4 [main] INFO org.perf4j.TimingLogger  - start[1514388922845] time[0] tag[test-multiwayMerge N=300000000 M=1000 d=1000000]
+Too many files
+4 [main] INFO org.perf4j.TimingLogger  - start[1514388922845] time[0] tag[test-multiwayMerge N=300000000 M=10000 d=100]
+Too many files
+5 [main] INFO org.perf4j.TimingLogger  - start[1514388922845] time[0] tag[test-multiwayMerge N=300000000 M=10000 d=1000]
+Too many files
+5 [main] INFO org.perf4j.TimingLogger  - start[1514388922846] time[0] tag[test-multiwayMerge N=300000000 M=10000 d=10000]
+Too many files
+5 [main] INFO org.perf4j.TimingLogger  - start[1514388922846] time[0] tag[test-multiwayMerge N=300000000 M=10000 d=100000]
+Too many files
+5 [main] INFO org.perf4j.TimingLogger  - start[1514388922846] time[0] tag[test-multiwayMerge N=300000000 M=10000 d=1000000]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514392173349] time[202291] tag[test-multiwayMerge N=300000000 M=100000 d=100]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514392173523] time[185211] tag[test-multiwayMerge N=300000000 M=100000 d=1000]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514392173712] time[162321] tag[test-multiwayMerge N=300000000 M=100000 d=10000]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514392173941] time[134328] tag[test-multiwayMerge N=300000000 M=100000 d=100000]
+1 [main] INFO org.perf4j.TimingLogger  - start[1514392174112] time[163245] tag[test-multiwayMerge N=300000000 M=100000 d=1000000]
+0 [main] INFO org.perf4j.TimingLogger  - start[1514391086173] time[190987] tag[test-multiwayMerge N=300000000 M=1000000 d=100]
+250776 [main] INFO org.perf4j.TimingLogger  - start[1514391277387] time[250596] tag[test-multiwayMerge N=300000000 M=1000000 d=1000]
+423753 [main] INFO org.perf4j.TimingLogger  - start[1514391527978] time[172980] tag[test-multiwayMerge N=300000000 M=1000000 d=10000]
+591670 [main] INFO org.perf4j.TimingLogger  - start[1514391700955] time[167921] tag[test-multiwayMerge N=300000000 M=1000000 d=100000]
+770865 [main] INFO org.perf4j.TimingLogger  - start[1514391868872] time[179198] tag[test-multiwayMerge N=300000000 M=1000000 d=1000000]
+
+

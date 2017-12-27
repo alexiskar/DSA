@@ -19,6 +19,7 @@ import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 import sort.DMergeSort;
 import sort.ExtMergeSort;
+import sort.heapSort;
 import inputStream.Fread.*;
 import inputStream.Buffer.*;
 import inputStream.Mapping.*;
@@ -27,8 +28,9 @@ import inputStream.SystemCall.*;
 public class Main {
 	final static Logger logger = Logger.getLogger(Main.class);
 	static int MAX_STREAMS=1;
-	static int MAX_INTS=30000000;
+	static int MAX_INTS=1000000;
 	static int MAX_N=1;
+	static int B=30000000;
 	static List<Integer> values = new ArrayList();
 	static void clearDIR() {
 
@@ -44,7 +46,7 @@ public class Main {
 	}
 	static void createDataSet(int l) {
 		for(int j=0;j<l;j++) {
-			MapOut mo = new MapOut("data/set"+j+".data",500);
+			MapOut mo = new MapOut("data/set"+j+".data",500000);
 	        for (int i = 0; i < MAX_INTS; i++) {
 	        		int nr = ThreadLocalRandom.current().nextInt(Integer.MIN_VALUE, Integer.MAX_VALUE);
 	             mo.write(nr);
@@ -60,7 +62,6 @@ public class Main {
 		  BasicConfigurator.configure();
 
 		  
-		  /*
 		  //System call
 		  System.out.println("Test System call");
 		  for(int Ks=1;Ks<=MAX_STREAMS;Ks++) {
@@ -134,41 +135,48 @@ public class Main {
 			  clearDIR();
 			  }
 			  }
-		  }*/
-
-		  //multiway-merge sort internal memory
-		 /* List<List<Integer>> inp = new ArrayList<List<Integer>>();
-		  MapInp mi = new MapInp("data/set0.data",10000);
+		  }
+		  //heap sort internal memory
+		  List<Integer> inp = new ArrayList();
+		  MapInp mi = new MapInp("data/set0.data",1000000);
 		  int b=0;
 		  while(!mi.endOfStream()) {
-			  List<Integer> t=new ArrayList<Integer>();
 			  //b=;
-			  
-			  for(int i=0;i<mi.bufSize;i++) {
-				  //d = (file size)/(buffer size)
-				  		b=mi.readNext();
-					  t.add(b);
-			  }
-			  
-			  inp.add(t);
+				  	b=mi.readNext();
+					  inp.add(b);
 		  }
-		  for(int i=0;i<inp.size();i++) {
-			  Collections.sort(inp.get(i));
-		  }
-		  DMergeSort a = new DMergeSort();
-		  a.kMerge(inp);*/
+		  //internal sort for comparison
+
+			StopWatch wa = new Log4JStopWatch("test-internal heap sort N="+MAX_INTS);
+		  heapSort a = new heapSort();
+		  a.sort(inp);
+		  a.outputResult("data/a.out", 100000);
+		  wa.stop();
 
 		  //multiway-merge sort external memory
-		  /*
-		  ExtMergeSort e = new ExtMergeSort(100000,10000);
-		  e.firstSort();
-		  
-		  MapInp c = new MapInp("data/out/sort0_1.data",10);
-		  int d=0;
-		  while(!c.endOfStream()) { int t=c.readNext(); 
-		  if(t==0) d++;  }
-		  System.out.println(d);
-		  */
+			
+			//the best value from previous part
+			int[] d = {100,1000,10000,100000,1000000};
+			int[] N= {100,10000,100000,1000000,30000000,300000000};
+		  //multiway-merge sort external memory
+		  //M B D
+			for(int j=0;j<N.length;j++) {
+				MAX_INTS=N[j];
+			createDataSet(1);
+			for(int m=10;m<10000000;m*=10) {
+			  //different memory sizes
+			  for(int i=0;i<d.length;i++) {
+				wa = new Log4JStopWatch("test-multiwayMerge N="+N[j]+" M="+m+" d="+d[i]);
+				ExtMergeSort dm = new ExtMergeSort(m,B,d[i]);
+				  dm.firstSort();
+				  dm.sort();
+				  wa.stop();
+				  dm.clear();
+			  }
+			}
+			File file = new File("data/set0.data");
+			file.delete();
+			}
 	  }
 	  public static class ExpRunSysCall implements Runnable {
 			  int i;
@@ -240,7 +248,6 @@ public class Main {
 				out.create("data/out/outp"+i+".data");
 				
 				while(!inp.endOfStream()) {
-					//System.out.println(inp.readNext());
 					out.write(inp.readNext());
 				}
 				

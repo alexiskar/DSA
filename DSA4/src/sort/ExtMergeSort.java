@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -14,207 +15,91 @@ import sort.DMergeSort;
 
 
 public class ExtMergeSort {
-
+	private int MAX_STREAMS=10240;
+	//for OS X http://krypted.com/mac-os-x/maximum-files-in-mac-os-x/
 	private int M=10;
 	private int B=1;
-	private int d=8;
-	private int dS = d;
-	private int numOfFilesNM;
-	private int step=0;
-	private int addStep=0;
-	private PriorityQueue<MapInp> heap;
-	public ExtMergeSort(int M, int B) {
+	private int d=4;
+	private long step=0,stepF=0;
+	private int nf=0;
+	int numOfInts = 0;
+	String add="";
+	boolean interupted=false;
+	public ExtMergeSort(int M, int B, int D) {
+		//if(B>M) B=M;
 		this.M=M; //set size of available memory
-		this.B=B;
+		this.B=B; //set buffer
+		this.d=D; //set current d
 	}
 	public void firstSort() {
 		MapInp mi = new MapInp("data/set0.data",B);
-		int numOfInts = (int)Math.ceil(((double)mi.getFS()/4.0));
-		numOfFilesNM= (int)Math.ceil(((double)numOfInts/(double)M));
-		int numOfBuffs = (int)Math.ceil(((double)M/(double)B));
-		
-			for(int i=0;i<numOfFilesNM;i++) {
-				List<List<Integer>> inpl = new ArrayList<List<Integer>>();
-				for(int j=0;j<numOfBuffs;j++) {
-					List<Integer> t=new ArrayList<Integer>();
-					for(int l=0;l<B;l++) {
-						if(!mi.endOfStream())
-							t.add(mi.readNext());
-					}
-					//System.out.println(t.get(0));
-					if(t.size()>0) inpl.add(t);
-				}
-				  DMergeSort a = new DMergeSort();
-				  a.kMerge(inpl);
-				  a.outputResult("data/out/sort"+i+"_.data",B);
+		numOfInts=(int)Math.ceil(((double)mi.getFS()/4.0));
+		if(M>mi.getFS()/4) M = (int) (mi.getFS()/4);
+		nf= (int)Math.ceil(((double)numOfInts/(double)M));
+		step = stepF= (int) (Math.log(nf/d)/Math.log(d-1))+1;
+		if(step<0) step=1;
+		if(nf>MAX_STREAMS) {
+			System.out.println("Too many files");
+			interupted=true;
+		}
+		else {
+		for(int j=0;j<nf;j++) {
+			int i=0;
+			List<Integer> listToSort = new ArrayList();
+			for(i=0;i<M;i++) {
+				if(!mi.endOfStream())
+				listToSort.add(mi.readNext());
+				else
+					break;
 			}
-			addStep=numOfFilesNM%d;
-			sort();
-
-	}
+			Collections.sort(listToSort);
+			MapOut mo=new MapOut("data/spl_"+j+".tmp",i); 
+			for(i=0;i<listToSort.size();i++) {
+				mo.write(listToSort.get(i));
+			}
+			mo.close();
+			}
+		if(nf==1) { File file = new File("data/spl_0.tmp");file.delete(); }
+		}
+		mi.close();
+		}
+			
 	public void sort() {
-		String add = (step>0)?"_"+(step+1):"_";
-		if(step==0) { step=numOfFilesNM/d;}
-		System.out.println("add: "+add);
+		if(!interupted && nf>1) {
 		int i=0;
-		int FS=0;
-		String lfs = null;
-		for(i=0;i<step;i++) {
-			heap = new PriorityQueue<MapInp>(numOfFilesNM, new extComparator());
-			for(int j=0;j<d;j++) {
-			try {
-				if(Files.exists(Paths.get("data/out/sort"+(i*d+j)+add+".data"))) {
-				int f=(int)(new MapInp("data/out/sort"+(i*d+j)+add+".data",B).getFS());
-				if(f>0) {
-				heap.add(new MapInp("data/out/sort"+(i*d+j)+add+".data",B));
-				FS+=(new MapInp("data/out/sort"+(i*d+j)+add+".data",B).getFS());
-				lfs="data/out/sort"+(i*d+j)+add+".data";
-				System.out.println(lfs);
-				}
-				}
-			}
-			catch(NullPointerException e) {
-				System.out.println("data/out/sort"+i+".data");
-			}
-			}
-			//merge
-			MapOut mo = new MapOut("data/out/sort"+i+"_"+step+".data",FS/4);
-			for(int j=0;j<FS/4;j++) {
-				if(heap.peek().endOfStream()) break;
-			//while(!heap.peek().endOfStream()) {
-				int t = heap.peek().readNext();
-				//System.out.println("Step: "+step+" val: "+t);
-				mo.write(t);
-				}
-			mo.close();
-			FS=0;
-			heap.clear();
+		List<MapInp> lOS = new ArrayList();
+		int lastNF=nf;
+		if(step<stepF) add="_"+(step+1);
+		for(i=0;i<nf;i++) {
+			lOS.add(new MapInp("data/spl_"+i+add+".tmp",B));			
 		}
-		for(i=0;i<1;i++) {
-		for(int j=0;j<d;j++) {
-			//remove old files
-			try {
-			    Files.delete(Paths.get("data/out/sort"+(i*d+j)+add+".data"));
-			} catch (NoSuchFileException x) {
-			} catch (DirectoryNotEmptyException x) {
-			    
-			} catch (IOException x) {
-			    // File permission problems are caught here.
-			    System.err.println(x);
-			}
+		nf = (int)Math.ceil(((double)nf/(double)d));
+		for(i=0;i<nf;i++) {
+			int start=d*i;
+			int end=start+d;
+			if(i+1==nf) end = lOS.size();
+			DMergeSort sortOut = new DMergeSort(lOS.subList(start, end),"data/spl_"+i+"_"+step+".tmp",B);			
 		}
-		}
-		if(step==1 && Files.exists(Paths.get("data/out/sort1_2.data"))) {
-			//if there is a file on pre-finish step
-			heap.add(new MapInp("data/out/sort1_2.data",B));
-			heap.add(new MapInp("data/out/sort0_1.data",B));
-			FS+=(new MapInp("data/out/sort1_2.data",B).getFS());
-			FS+=(new MapInp("data/out/sort0_1.data",B).getFS());
-
-			MapOut mo = new MapOut("data/out/sort1.data",FS/4);
-			//for(int j=0;j<B*(d-step);j++) {
-			while(!heap.peek().endOfStream()) {
-				int t = heap.peek().readNext();
-				System.out.println("Step: val: "+t);
-				mo.write(t);
-				}
-			mo.close();
-
-			try {
-			    Files.delete(Paths.get("data/out/sort1_2.data"));
-			    Files.delete(Paths.get("data/out/sort0_1.data"));
-			} catch (NoSuchFileException x) {
-			} catch (DirectoryNotEmptyException x) {
-			    
-			} catch (IOException x) {
-			    // File permission problems are caught here.
-			    System.err.println(x);
-			}
-			
-		}
-		
-		if(step==1 && addStep>0) {
-			//if there are files which were left on the first step
-			heap.clear();
-			FS=0;
-		for(int j=0;j<addStep;j++) {
-			heap = new PriorityQueue<MapInp>(numOfFilesNM/dS, new extComparator());
-			try {
-				heap.add(new MapInp("data/out/sort"+(addStep*dS+j)+"_.data",B));
-				FS+=(new MapInp("data/out/sort"+(addStep*dS+j)+"_.data",B).getFS());
-			}
-			catch(NullPointerException e) {
-				System.out.println("Error: data/out/sort"+i+"_.data");
-			}
-			
-		}
-		
-		
-		MapOut mo = new MapOut("data/out/sort0_0.data",FS/4);
-		while(!heap.peek().endOfStream()) {
-		int t = heap.peek().readNext();
-		mo.write(t);
-		}
-		mo.close();
-		
-		heap.clear();
-		FS=0;
-
-		for(int j=0;j<addStep;j++) {
-			heap = new PriorityQueue<MapInp>(numOfFilesNM/dS, new extComparator());
-			try {
-
-		    Files.delete(Paths.get("data/out/sort"+(addStep*dS+j)+"_.data"));
-			}
-		    catch (NoSuchFileException x) {
-		} catch (DirectoryNotEmptyException x) {
-		    
-		} catch (IOException x) {
-		    // File permission problems are caught here.
-		    System.err.println(x);
-		}
-			}
-		}
-		
-		
-		if(Files.exists(Paths.get("data/out/sort0_0.data"))) {
-//final merge
-			heap = new PriorityQueue<MapInp>(numOfFilesNM/dS, new extComparator());
-			try {
-				heap.add(new MapInp("data/out/sort0_0.data",B));
-				FS+=(new MapInp("data/out/sort0_0.data",B).getFS());
-				
-				
-				
-				if(Files.exists(Paths.get("data/out/sort1.data"))) {
-				System.out.println("1");
-				heap.add(new MapInp("data/out/sort1.data",B));
-				FS+=(new MapInp("data/out/sort1.data",B).getFS());
-				}
-				else {
-					System.out.println("2");
-					heap.add(new MapInp("data/out/sort0_1.data",B));
-					FS+=(new MapInp("data/out/sort0_1.data",B).getFS());
-				}
-			}
-			catch(NullPointerException e) {
-				System.out.println("Error: data/out/sort"+i+"_.data");
-			}
-
-		MapOut mo = new MapOut("data/out/res.data",FS/4);
-		while(!heap.peek().endOfStream()) {
-		int t = heap.peek().readNext();
-		mo.write(t);  
-		}
-		mo.close();
-		
-		
-		
-		}
-	
-		d/=2;
+		for(MapInp file:lOS) file.close();
 		step--;
-		if(step>0) sort();
+		if(step>=0) sort();
+		}
+	}
+	public void clear() {
+		if(!interupted) {
+		File file;
+		file = new File("data/spl_0_0.tmp");
+		file.delete();
+		nf= (int)Math.ceil(((double)numOfInts/(double)M));
+		for(long i=stepF+1;i>0;i--) {
+			for(int j=0;j<nf;j++) {
+				if(i==stepF+1) file = new File("data/spl_"+j+".tmp");
+				else file = new File("data/spl_"+j+"_"+i+".tmp");
+				file.delete();
+			}
+			nf = (int)Math.ceil(((double)nf/(double)d));
+		}
+	}
 	}
 	
 }
